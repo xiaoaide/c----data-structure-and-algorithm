@@ -46,14 +46,17 @@ static int search_hashtable(struct hash_table *tb, int data)
 	int position;
 
 	position = data % HASH_LEN;
-	while (tb->key[position] != data && tb->key[position] != NULL1) {
+	while (tb->key[position] != data) {
+		if (tb->key[position] == NULL1) {
+			printf("search_hashtable failed\n");
+			return -1;
+		}
 		position += 1;
 		position = position % HASH_LEN;
-	}
-
-	if (tb->key[position] == NULL1) {
-		printf("search_hashtable failed\n");
-		return -1;
+		if (position == data % HASH_LEN) {
+			printf("search_hashtable failed\n");
+			return -1;
+		}
 	}
 
 	printf("search_hashtable success\n");

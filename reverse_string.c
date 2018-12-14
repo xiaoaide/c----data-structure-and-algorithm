@@ -8,6 +8,9 @@ static void reverse_order(char *s)
 	int len;
 	int right, left;
 	char temp;
+
+	if (s == NULL)
+		return;
 	
 	len = strlen(s);
 	
@@ -23,11 +26,84 @@ static void reverse_order(char *s)
 	}
 }
 
+static void reverse_order1(char *s)
+{
+	char *p = s;
+	char temp;
+
+	if (s == NULL)
+		return;
+
+	while (*s != '\0') {
+		s++;
+	}
+	s--;
+
+	while (p < s) {
+		temp = *s;
+		*s = *p;
+		*p = temp;
+		s--;
+		p++;	
+	}
+}
+
+static void recur_string(char *s)
+{
+	if (*s != '\0') {
+		recur_string(s + 1);
+	}
+	printf("%c", *s);
+}
+
+static void reverse_lianxi(char *s)
+{
+	char *str;
+	char temp;
+
+	if (!s) {
+		printf("the s invalid\n");
+		return;
+	}
+	
+	str = s;
+	while (*s != '\0') {
+		s++;
+	}
+	s--;
+
+	while (str < s) {
+		temp = *str;
+		*str = *s;
+		*s = temp;
+		s--;
+		str++;	
+	}
+}
+
+static void recur_string_lianxi(char *s)
+{
+	char *str;
+
+	if (*s == '\0') {
+		return;
+	} else {
+		str = s + 1;
+		recur_string_lianxi(str);
+		printf("%c", *s);
+	}
+}
+
 
 int main(int atgc, void *argv[])
 {
 	char s[] = "abcdef";
 
-	reverse_order(s);	
+	//reverse_order1(s);	
+	reverse_lianxi(s);
 	printf("%s\n", s);
+
+	printf("recur_string:\n");
+	recur_string_lianxi(s);
+	printf("\n");
 }

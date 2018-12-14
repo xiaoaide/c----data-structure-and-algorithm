@@ -33,9 +33,34 @@ static int match(char *s, char *t)
 	return -1;
 }
 
+static int match_lianxi(char *s, char *t)
+{
+	int count = 0;
+	int i, j, k, lens, lent;
+
+	if (s == NULL || t == NULL)
+		return -1;
+
+	lens = strlen(s); 
+	lent = strlen(t); 
+
+	for (i = 0; i < lens; i++) {
+		k = i;
+		for (j = 0; j < lent; j++) {
+			if (s[k] != t[j])	
+				break;
+			k++;
+		}
+		if (j == lent)
+			count++;
+	}
+
+	return count;
+}
+
 int main (int argc, char *argv[])
 {
-	char *a = "ababcabcacbab";
+	char *a = "ababcabcacbabcbab";
 	char *b = "cbab";
 	int position;
 
@@ -43,6 +68,8 @@ int main (int argc, char *argv[])
 	if (position != -1) {
 		printf("the position is %d\n", position);
 	}
+
+	printf("the match count is %d\n", match_lianxi(a, b));
 	
 
 	return 0;

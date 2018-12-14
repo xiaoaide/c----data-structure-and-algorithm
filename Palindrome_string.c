@@ -22,10 +22,31 @@ static int palindrome_string(char *s)
 	return 1;
 }
 
+static int palindrome_string_lianxi(char *s)
+{
+	char *str;
+	char *end;
+
+	str = s;
+	end = s;
+	while (*end != '\0')
+		end++;
+	end--;
+
+	while (str < end) {
+		if (*str != *end)
+			return 0;
+		str++;
+		end--;
+	}
+
+	return 1;
+}
+
 
 int main(int atgc, void *argv[])
 {
 	char *s = "abccdcba";
 
-	printf("the string is palindrome %d\n", palindrome_string(s));
+	printf("the string is palindrome %d\n", palindrome_string_lianxi(s));
 }

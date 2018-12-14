@@ -37,11 +37,42 @@ static int max_child(char *s)
 	return max_len;
 }
 
+static int max_child_lianxi(char *s)
+{
+	int max_len = 0;
+	int i, j, k;
+	int len, count;
+
+	if (s == NULL)
+		return -1;
+	
+	len = strlen(s);
+
+	for (i = 0; i < len; i++) {
+		count = 1;
+		for (j = i + 1; j < len; j++) {
+			k = j - 1;
+			while (k >= i) {
+				if (s[j] == s[k])
+					break;
+				k--;
+			}
+			if (k >= i)
+				break;
+			count++;
+		}
+		if (count > max_len)
+			max_len = count;
+	}
+
+	return max_len;
+}
+
 
 
 int main(int atgc, void *argv[])
 {
 	char *s = "abcabcbb";
 
-	printf("max child len is %d\n", max_child(s));
+	printf("max child len is %d\n", max_child_lianxi(s));
 }

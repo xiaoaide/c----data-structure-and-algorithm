@@ -42,6 +42,21 @@ static void sort_down(int a[], int n)
 		}
 	}
 }
+static void sort_up_lianxi1(int a[], int n)
+{
+	int i, j;
+	int temp;
+
+	for (i = 0; i < n - 1; i++) {
+		for (j = 0; j < n - 1 - i; j++) {
+			if (a[j] > a[j + 1]) {
+				temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
+}
 
 
 int main (int argc, char *argv[])
@@ -49,6 +64,8 @@ int main (int argc, char *argv[])
 	int a[8] = {49,38,65,97,76,13,27,49};
 
 	sort_up(a, 8);
+	print_sort(a, 8);
+	sort_up_lianxi1(a, 8);
 	print_sort(a, 8);
 	sort_down(a, 8);
 	print_sort(a, 8);

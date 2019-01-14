@@ -81,6 +81,30 @@ static void reverse_lianxi(char *s)
 	}
 }
 
+static void reverse_lianxi1(char *s)
+{
+	char *head, *end;
+	char temp;
+
+	if (s == NULL)
+		return;
+
+	head = end = s;
+
+	while (*end != '\0')
+		end++;
+
+	end--;
+
+	while (head < end) {
+		temp = *head;
+		*head = *end;
+		*end = temp;
+		end--;
+		head++;
+	}	
+}
+
 static void recur_string_lianxi(char *s)
 {
 	char *str;
@@ -94,16 +118,26 @@ static void recur_string_lianxi(char *s)
 	}
 }
 
+static void recur_string_lianxi1(char *s)
+{
+	if (*s == '\0') {
+		return;
+	}
+
+	recur_string_lianxi1(s + 1);
+	printf("%c ", *s);
+}
+
 
 int main(int atgc, void *argv[])
 {
 	char s[] = "abcdef";
 
 	//reverse_order1(s);	
-	reverse_lianxi(s);
+	reverse_lianxi1(s);
 	printf("%s\n", s);
 
 	printf("recur_string:\n");
-	recur_string_lianxi(s);
+	recur_string_lianxi1(s);
 	printf("\n");
 }

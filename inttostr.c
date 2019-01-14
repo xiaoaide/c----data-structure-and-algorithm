@@ -118,6 +118,35 @@ static void inttostr_lianxi(char *s, int val)
 	reverse_string_lianxi(str);
 }
 
+static void inttostr_lianxi1(char *s, int val)
+{
+	char *str;
+	int negative = 0;
+
+	str = s;
+
+	if (val < 0) {
+		negative = 1;
+		val = 0 - val;
+	}
+
+	while (val / 10 != 0) {
+		*str = val % 10 + 0x30;
+		str++;
+		val = val / 10;
+	}
+
+	*str = val % 10 + 0x30;
+	str++;
+	if (negative) {
+		*str = '-';
+		str++;
+	}
+	*str = '\0';
+
+	reverse_string_lianxi(s);
+}
+
 int main(int atgc, void *argv[])
 {
 	int val;
@@ -126,7 +155,7 @@ int main(int atgc, void *argv[])
 
 	val = -3456;
 //	s = inttostr(val);
-	inttostr_lianxi(s1, val);
+	inttostr_lianxi1(s1, val);
 
 	printf("the s is %s\n", s1);
 	

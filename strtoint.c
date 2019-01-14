@@ -84,10 +84,49 @@ static int strtoint_lianxi(char *s)
 	return val;
 }
 
+static int strtoint_lianxi1(char *s)
+{
+	int negative = 0;
+	long long val = 0;
+
+	if (s == NULL)
+		return 0;
+
+	if (*s == '\0')
+		return 0;
+
+	if (*s == '-') {
+		negative = 1;
+		s++;
+	}
+
+	while (*s != '\0') {
+		if (*s < 0x30 || *s > 0x39) {
+			printf("the s is invaild\n");
+			return 0;
+		}
+
+		val = val * 10 + (*s - 0x30);
+		s++;
+	}
+
+	if (negative)
+		val = 0 - val;
+
+	if (val > 0x7fffffffLL)
+		val = 0x7fffffffLL;
+	else if (val < -0x80000000LL)
+		val = -0x80000000LL;
+
+	return val;
+
+	
+}
+
 
 int main(int atgc, void *argv[])
 {
-	char *s = "9934";
+	char *s = "-9934";
 	
-	printf("the str val is %d\n", strtoint_lianxi(s));
+	printf("the str val is %d\n", strtoint_lianxi1(s));
 }
